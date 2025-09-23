@@ -1,11 +1,35 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom'
+import { createBrowserRouter } from 'react-router-dom'
+
+import App from "./App";
+import PaginaDevolucao from "./pages/devolucao";
+import paginaEmprestimo from "./pages/emprestimo";
+import paginaRegistro from "./pages/registro";
+import paginaRenovacao from "./pages/renovacao";
+
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <App/>
+  },{
+    path: '/devolucao',
+    element: <PaginaDevolucao />
+  },{
+    path: '/',
+    element: <App/>
+  },{
+    path: '/',
+    element: <App/>
+  },
+
+])
+
 import './index.css'
-import MenuInicial from './pages/menuInicial'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <MenuInicial />
+    <App />
   </StrictMode>,
 )
