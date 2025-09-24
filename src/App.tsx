@@ -1,11 +1,10 @@
 import React from 'react'
+
 import { Link } from 'react-router-dom'
 import './App.css'
-import Rotas from './routes/routes'
-import { BrowserRouter } from 'react-router-dom'
 
 
-function App() {
+export default function App() {
   return (
     <div className='menu'>
       <h1>Livraria IPVSol Kids</h1>
@@ -26,5 +25,3 @@ function App() {
 
   )
 }
-
-export default App
