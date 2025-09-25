@@ -4,15 +4,25 @@ import React from 'react'
 export default function PaginaRenovacao(){
     const [barcode, setBarcode] = useState('')
 
-    function handleInput(e){
-        setBarcode(e.target.value);
+    function handleChange(e){
+        setBarcode(e.target.value)
+    }
+
+    function verifyInput(e){
+        const regex = new RegExp(/^(97(8|9))?\d{9}(\d|X)$/)
+        return regex.test(e.target.value)
     }
 
     function handleSubmit(e){
         e.preventDefault()
-        const form = e.target;
-        const formData = formData(form)
-        console.log(formData)
+        console.log(barcode)
+        if (!verifyInput(barcode)) {
+            console.log('não validado', barcode)
+            return
+        }
+        
+        console.log(barcode)
+        console.log('validado')
     }
 
 
@@ -23,7 +33,7 @@ export default function PaginaRenovacao(){
         <label>Escaneie o código do livro
         <input type="text"
         value={barcode}
-        onChange={handleInput}
+        onChange={handleChange}
         />
         </label>
         </form>
