@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import './App.css'
 
 
-export default function App() {
+export default function App():React.ReactElement {
   return (
     <div className='menu'>
       <h1>Livraria IPVSol Kids</h1>
@@ -22,6 +22,5 @@ export default function App() {
       <button className='btn renovacao'>Renovação</button>
       </Link>
     </div>
-
   )
 }
