@@ -7,7 +7,6 @@ import VerificacaoCodigoBarras from '../components/insercaoCodigoBarras'
 export default function PaginaRenovacao(){
     return (
     <>
-        <h1>renovacao</h1>
         <VerificacaoCodigoBarras />
     </>
     )
