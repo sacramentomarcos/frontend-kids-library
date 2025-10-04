@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import DadosLivro from "./livroInfo";
 import { type dadosLivrosProps } from "../types/livroDTO";
+import { type visibilidadeLivro } from "../types/livroVisivel";
 
 
-
-export default function VerificacaoCodigoBarras(visivel=(valor:Boolean)=>!valor){
+export default function VerificacaoCodigoBarras({ onLivroVisivel }:visibilidadeLivro){
     const [codigoBarras, setCodigoBarras] = useState('')
     const [dadosLivro, setDadosLivro] = useState<dadosLivrosProps | null>(null)
 
@@ -27,13 +27,14 @@ export default function VerificacaoCodigoBarras(visivel=(valor:Boolean)=>!valor)
                 author: dadosJSON.authors ? dadosJSON.authors[0] : 'Não identificado',
                 year: dadosJSON.year ? dadosJSON.year : 'Não identificado',
                 publisher: dadosJSON.publisher ? dadosJSON.publisher : 'Não identificado'
-            };
-            setDadosLivro(livroFormatado)
-            visivel(true)
-
+            }
+            setDadosLivro(livroFormatado);
+            onLivroVisivel?.(true)
+            console.log('livro formatou')
             } catch (e) {
                 console.log(`error - ${e}`);
-                setDadosLivro(null)
+                setDadosLivro(null);
+                onLivroVisivel?.(false)
             }
         }, 800)
 

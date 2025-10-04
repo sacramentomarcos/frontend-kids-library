@@ -9,7 +9,6 @@ export default function DadosLivro({title, author, year, publisher}:dadosLivrosP
             <h3>{author}</h3>
             <h3>{year}</h3>
             <h3>{publisher}</h3>
-            
         </div>
     )
 }
