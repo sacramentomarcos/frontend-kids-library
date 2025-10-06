@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import DadosLivro from "./livroInfo";
 import { type dadosLivrosProps } from "../types/livroDTO";
-import { type visibilidadeLivro } from "../types/livroVisivel";
 
+type Props = {
+    onLivroEncontrado?: (livro: dadosLivrosProps) => void
+}
 
-export default function VerificacaoCodigoBarras({ onLivroVisivel }:visibilidadeLivro){
+export default function VerificacaoCodigoBarras({ onLivroEncontrado }: Props){
     const [codigoBarras, setCodigoBarras] = useState('')
     const [dadosLivro, setDadosLivro] = useState<dadosLivrosProps | null>(null)
 
@@ -29,12 +31,11 @@ export default function VerificacaoCodigoBarras({ onLivroVisivel }:visibilidadeL
                 publisher: dadosJSON.publisher ? dadosJSON.publisher : 'Não identificado'
             }
             setDadosLivro(livroFormatado);
-            onLivroVisivel?.(true)
+            onLivroEncontrado?.(livroFormatado)
             console.log('livro formatou')
             } catch (e) {
                 console.log(`error - ${e}`);
                 setDadosLivro(null);
-                onLivroVisivel?.(false)
             }
         }, 800)
 

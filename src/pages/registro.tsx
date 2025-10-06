@@ -8,13 +8,13 @@ export default function PaginaRegistro(){
     return (
         <>
         <h1>Registro</h1>
-        <p>Insira o código de barras do livro:</p>
+        {/* <p>Insira o código de barras do livro:</p>
             <VerificacaoCodigoBarras onLivroVisivel={setLivroVisivel}/>
         {livroVisivel && (
             <form onSubmit={}>
             <button>Prosseguir para próxima página</button>
             </form>
-        )}
+        )} */}
         </>
     )
     

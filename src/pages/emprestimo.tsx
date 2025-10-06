@@ -1,19 +1,32 @@
-import React from 'react'
+import React, { useState } from 'react'
 import VerificacaoCodigoBarras from '../components/insercaoCodigoBarras'
+import { type dadosLivrosProps } from '../types/livroDTO'
+import { useNavigate } from 'react-router-dom'
+
 
 export default function PaginaEmprestimo(){
-    
+    const navigate = useNavigate()
+    const [livro, setLivro] = useState<dadosLivrosProps>()
+
+
+
     return (
         <>
         <h1>Empréstimo</h1>
         <p>Insira o código de barras do livro:</p>
-            <VerificacaoCodigoBarras />
-        <div>
-            <input type="button"
-            value="Próximo"
-            >
-            </input>
-        </div>
+            <VerificacaoCodigoBarras onLivroEncontrado={setLivro}/>
+        {
+        livro &&
+            (
+            <div>
+                <input type="button"
+                value="Próximo"
+                onClick={() => navigate('/confirmaemprestimo', {state:{livro}})}
+                >
+                </input>
+            </div>
+            )
+        }
         </>
     )
     
