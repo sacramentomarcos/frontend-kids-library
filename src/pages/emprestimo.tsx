@@ -15,6 +15,12 @@ export default function PaginaEmprestimo(){
         <h1>Empréstimo</h1>
         <p>Insira o código de barras do livro:</p>
             <VerificacaoCodigoBarras onLivroEncontrado={setLivro}/>
+        <br />
+        <input
+        type="text"
+        placeholder='Código da família'
+        
+        ></input>
         {
         livro &&
             (

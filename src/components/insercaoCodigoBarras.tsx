@@ -6,7 +6,7 @@ type Props = {
     onLivroEncontrado?: (livro: dadosLivrosProps) => void
 }
 
-export default function VerificacaoCodigoBarras({ onLivroEncontrado }: Props){
+export default function VerificacaoCodigoBarras({ onLivroEncontrado }: Props) {
     const [codigoBarras, setCodigoBarras] = useState('')
     const [dadosLivro, setDadosLivro] = useState<dadosLivrosProps | null>(null)
 
@@ -47,6 +47,7 @@ export default function VerificacaoCodigoBarras({ onLivroEncontrado }: Props){
         <input
         type='text'
         onChange={(e) => setCodigoBarras(e.target.value)}
+        placeholder="Escaneie código do livro"
         autoFocus
         >
         </input>
