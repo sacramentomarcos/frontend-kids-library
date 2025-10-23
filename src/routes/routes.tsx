@@ -5,7 +5,6 @@ import PaginaDevolucao from "../pages/devolucao";
 import PaginaEmprestimo from "../pages/emprestimo";
 import PaginaRegistro from "../pages/registro";
 import PaginaRenovacao from "../pages/renovacao";
-import PaginaEmprestimoConfirma from '../pages/emprestimoconfirma';
 
 
 export const router = createBrowserRouter([
@@ -24,11 +23,7 @@ export const router = createBrowserRouter([
   },{
     path: '/renovacao',
     element: <PaginaRenovacao/>
-  },{
-    path: '/confirmaemprestimo',
-    element:<PaginaEmprestimoConfirma />
   }
-
 ], {
   basename: '/'
 });

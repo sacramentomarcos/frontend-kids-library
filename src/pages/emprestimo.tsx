@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import VerificacaoCodigoBarras from '../components/insercaoCodigoBarras'
 import { type dadosLivrosProps } from '../types/livroDTO'
 import { useNavigate } from 'react-router-dom'
+import EmprestimoID from '../components/emprestimoID'
 
 
 export default function PaginaEmprestimo(){
@@ -12,27 +13,12 @@ export default function PaginaEmprestimo(){
 
     return (
         <>
-        <h1>Empréstimo</h1>
+        <EmprestimoID />
         <p>Insira o código de barras do livro:</p>
             <VerificacaoCodigoBarras onLivroEncontrado={setLivro}/>
         <br />
-        <input
-        type="text"
-        placeholder='Código da família'
-        
-        ></input>
-        {
-        livro &&
-            (
-            <div>
-                <input type="button"
-                value="Próximo"
-                onClick={() => navigate('/confirmaemprestimo', {state:{livro}})}
-                >
-                </input>
-            </div>
-            )
-        }
+        <InputCodigoFamilia />
+
         </>
     )
     
