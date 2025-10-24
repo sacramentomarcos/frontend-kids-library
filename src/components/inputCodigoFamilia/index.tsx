@@ -1,11 +1,14 @@
 import React from "react";
 
 import { useState, useEffect } from "react";
+import Autocomplete from "@mui/material/Autocomplete";
+import TextField from "@mui/material/TextField";
+
 
 type IInfoFamilia = {
-    idUsuario: string
-    codigoFamilia: string
-    nomeCompleto: string
+    id_usuario: string
+    codigo_familia: string
+    nome_completo: string
 }
 
 
@@ -18,15 +21,15 @@ export default function InputCodigoFamilia() {
     const [infoFamilias, setInfoFamilias] = useState<IInfoFamilia[] | null>(null)
     const [usuarioSelecionado, setUsuarioSelecionado] = useState<string>('')
 
-    function handleChange(e:React.ChangeEvent<HTMLSelectElement>){
+    function handleChange(e){
         setUsuarioSelecionado(e.target.value)
         console.log('familia selecionada ->', e.target.value)
     }
     
     useEffect(() => {
         async function buscaFamilias() {
-        const dados = await fetch('localhost:3000/usuarios')
-        const dadosJSON:IInfoFamilia[] = await dados.json()
+        const dados = await fetch('http://127.0.0.1:3000/usuarios')
+        const dadosJSON = await dados.json()
         setInfoFamilias(dadosJSON)
         }
 
@@ -34,29 +37,16 @@ export default function InputCodigoFamilia() {
     }, [])
 
     return (
-        {infoFamilias ?(
-        <div>
-            <>
-            <label htmlFor="familia" style={{ display: "block", marginBottom: 8 }}>
-            Código da família:
-            </label>
-            <select
-                id="familia"
-                value={usuarioSelecionado}
-                onChange={handleChange}
-                style={{padding:8, width:"100%",maxWidth:300}}
-            >
-            <option value="" aria-placeholder="Selecione uma família"></option>
-            {infoFamilias.map((familia) => (
-                <option key={familia.idUsuario} value={familia.idUsuario}>
-                    {familia.codigoFamilia} - {familia.nomeCompleto}
-                </option>
-            ))}
-            </select>
-            </>
-        </div>))
-        :
-        <div>aguarde</div>}
-        }
-    )
+        infoFamilias && (
+
+        <Autocomplete
+            disablePortal
+            getOptionLabel={(option:IInfoFamilia) => option.nome_completo}
+            isOptionEqualToValue={(option, value) => {
+                return option.nome_completo === value.nome_completo
+            }}
+            options={infoFamilias}
+            renderInput={(params) => <TextField {...params} label="Código da família"/>}
+        />)
+        )
 }

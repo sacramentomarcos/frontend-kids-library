@@ -3,6 +3,7 @@ import VerificacaoCodigoBarras from '../components/insercaoCodigoBarras'
 import { type dadosLivrosProps } from '../types/livroDTO'
 import { useNavigate } from 'react-router-dom'
 import EmprestimoID from '../components/emprestimoID'
+import InputCodigoFamilia from '../components/inputCodigoFamilia'
 
 
 export default function PaginaEmprestimo(){
