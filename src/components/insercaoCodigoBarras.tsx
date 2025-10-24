@@ -4,12 +4,12 @@ import { type dadosLivrosProps } from "../types/livroDTO";
 import TextField from "@mui/material/TextField";
 
 type Props = {
-    onLivroEncontrado?: (livro: dadosLivrosProps) => void
+    setLivro: (livro: dadosLivrosProps) => void
+    livro?: dadosLivrosProps
 }
 
-export default function VerificacaoCodigoBarras({ onLivroEncontrado }: Props) {
+export default function VerificacaoCodigoBarras({ livro, setLivro }: Props) {
     const [codigoBarras, setCodigoBarras] = useState('')
-    const [dadosLivro, setDadosLivro] = useState<dadosLivrosProps | null>(null)
 
     function verificaCodigo(codigo:string) {
         if (codigo.length < 10) return
@@ -31,12 +31,10 @@ export default function VerificacaoCodigoBarras({ onLivroEncontrado }: Props) {
                 year: dadosJSON.year ? dadosJSON.year : 'Não identificado',
                 publisher: dadosJSON.publisher ? dadosJSON.publisher : 'Não identificado'
             }
-            setDadosLivro(livroFormatado);
-            onLivroEncontrado?.(livroFormatado)
+            setLivro(livroFormatado)
             console.log('livro formatou')
             } catch (e) {
                 console.log(`error - ${e}`);
-                setDadosLivro(null);
             }
         }, 800)
 
@@ -63,14 +61,14 @@ export default function VerificacaoCodigoBarras({ onLivroEncontrado }: Props) {
         />
 
         {
-            dadosLivro &&
+            livro &&
             (   <>
                 <h2>Dados do livro</h2>
                 <DadosLivro
-                title={dadosLivro.title}
-                author={dadosLivro.author}
-                year={dadosLivro.year}
-                publisher={dadosLivro.publisher}
+                title={livro.title}
+                author={livro.author}
+                year={livro.year}
+                publisher={livro.publisher}
                 />
                 </>
             )

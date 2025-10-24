@@ -4,41 +4,46 @@ import { type dadosLivrosProps } from '../types/livroDTO'
 import { useNavigate } from 'react-router-dom'
 import EmprestimoID from '../components/emprestimoID'
 import InputCodigoFamilia from '../components/inputCodigoFamilia'
-import { DatePicker } from '@mui/x-date-pickers'
 import dayjs from 'dayjs'
 import Calendario from '../components/calendario'
 
 
 
 export default function PaginaEmprestimo(){
-    const dataAtual = new Date()
-    const hoje = dayjs(dataAtual)
-    
+    const hoje = dayjs()
+    const proxima_semana = hoje.add(7, 'day')
+
 
     const navigate = useNavigate()
     const [livro, setLivro] = useState<dadosLivrosProps>()
-    const [dataEmprestimo, setDataEmprestimo] = useState<string>(hoje)
-    const [dataPrevisaoDevolucao, setDataPrevisaoDevolucao] = useState<Date | null>(null)
+    const [dataEmprestimo, setDataEmprestimo] = useState<dayjs.Dayjs>(hoje)
+    const [dataPrevisaoDevolucao, setDataPrevisaoDevolucao] = useState<dayjs.Dayjs>(proxima_semana)
+    const [idEmprestimo, setIdEmprestimo] = useState<number | null>(null)
 
-    const calendarioArgs = {
-        dataEmprestimo,
-        setDataEmprestimo
+
+    const hojeArgs = {
+        data: dataEmprestimo,
+        setData: setDataEmprestimo
     }
 
+    const proximaSemanaArgs = {
+        data: dataPrevisaoDevolucao,
+        setData: setDataPrevisaoDevolucao
+    }
 
     return (
         <>
-        <EmprestimoID />
+        <EmprestimoID setId={setIdEmprestimo} id={idEmprestimo}/>
         <p>Insira o código de barras do livro:</p>
-        <VerificacaoCodigoBarras onLivroEncontrado={setLivro}/>
+        <VerificacaoCodigoBarras setLivro={setLivro} livro={livro}/>
         <br />
         <InputCodigoFamilia />
         
-        <Calendario {...calendarioArgs} label="Data de Empréstimo"/>
-        <Calendario {...calendarioArgs} label="Previsão - Devolução"/>
-
-
+        <Calendario {...hojeArgs} label="Data de Empréstimo"/>
+        <Calendario {...proximaSemanaArgs} label="Previsão - Devolução"/>
         </>
     )
     
 }
+
+

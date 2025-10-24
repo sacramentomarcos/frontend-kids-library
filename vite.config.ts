@@ -8,6 +8,7 @@ export default defineConfig({
   watch: {
       ignored: ['**/node_modules/**', '**/dist/**'],
     },
-    cors: { origin: /^https?:\/\/(?:(?:[^:]+\.)?localhost|127\.0\.0\.1|\[::1\])(?::\d+)?$/ }
+    cors: { origin: /^https?:\/\/(?:(?:[^:]+\.)?localhost|127\.0\.0\.1|\[::1\])(?::\d+)?$/
+    }
   }
 })
