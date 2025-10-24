@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import DadosLivro from "./livroInfo";
 import { type dadosLivrosProps } from "../types/livroDTO";
+import TextField from "@mui/material/TextField";
 
 type Props = {
     onLivroEncontrado?: (livro: dadosLivrosProps) => void
@@ -44,13 +45,23 @@ export default function VerificacaoCodigoBarras({ onLivroEncontrado }: Props) {
 
     return (
     <>
-        <input
+        {/* <input
         type='text'
         onChange={(e) => setCodigoBarras(e.target.value)}
         placeholder="Escaneie código do livro"
         autoFocus
         >
-        </input>
+        </input> */}
+
+        <TextField
+        id="codigoBarras"
+        onChange={(e) => setCodigoBarras(e.target.value)}
+        autoFocus
+        variant="outlined"
+        required
+        label="Escaneie o código de barras"
+        />
+
         {
             dadosLivro &&
             (   <>
