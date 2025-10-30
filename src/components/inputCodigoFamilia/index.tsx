@@ -34,6 +34,7 @@ export default function InputCodigoFamilia() {
         setInfoFamilias(dadosJSON)
         }
 
+
         buscaFamilias()
     }, [])
 

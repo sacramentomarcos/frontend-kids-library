@@ -3,6 +3,7 @@ import DadosLivro from "./livroInfo";
 import { type dadosLivrosProps } from "../types/livroDTO";
 import TextField from "@mui/material/TextField";
 
+
 type Props = {
     setLivro: (livro: dadosLivrosProps) => void
     livro?: dadosLivrosProps
@@ -22,14 +23,15 @@ export default function VerificacaoCodigoBarras({ livro, setLivro }: Props) {
         
         const timeout = setTimeout(async () => {
             try {
-                const dadosLivro: Response = await fetch(`https://brasilapi.com.br/api/isbn/v1/${codigoBarras}`);
-            if (!dadosLivro.ok) {throw new Error('Livro não encontrado')};
+                const dadosLivro: Response = await fetch(`http://127.0.0.1:3000/livros/${codigoBarras}`);
+
+
+            if (!dadosLivro.ok) throw new Error('Livro não encontrado');
             const dadosJSON = await dadosLivro.json();
             const livroFormatado: dadosLivrosProps = {
-                title: dadosJSON.title,
-                author: dadosJSON.authors ? dadosJSON.authors[0] : 'Não identificado',
-                year: dadosJSON.year ? dadosJSON.year : 'Não identificado',
-                publisher: dadosJSON.publisher ? dadosJSON.publisher : 'Não identificado'
+                title: dadosJSON.titulo,
+                author: dadosJSON.autor,
+                year: dadosJSON.ano_publicacao
             }
             setLivro(livroFormatado)
             console.log('livro formatou')
@@ -68,7 +70,6 @@ export default function VerificacaoCodigoBarras({ livro, setLivro }: Props) {
                 title={livro.title}
                 author={livro.author}
                 year={livro.year}
-                publisher={livro.publisher}
                 />
                 </>
             )

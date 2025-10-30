@@ -6,6 +6,7 @@ import EmprestimoID from '../components/emprestimoID'
 import InputCodigoFamilia from '../components/inputCodigoFamilia'
 import dayjs from 'dayjs'
 import Calendario from '../components/calendario'
+import { useForm, type SubmitHandler } from 'react-hook-form'
 
 
 
@@ -21,15 +22,26 @@ export default function PaginaEmprestimo(){
     const [idEmprestimo, setIdEmprestimo] = useState<number | null>(null)
 
 
-    const hojeArgs = {
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors }
+    } = useForm()
+
+    const onSubmit = (data: any) => console.log(data)
+
+    const hojeProps = {
         data: dataEmprestimo,
         setData: setDataEmprestimo
     }
 
-    const proximaSemanaArgs = {
+    const proximaSemanaProps = {
         data: dataPrevisaoDevolucao,
         setData: setDataPrevisaoDevolucao
     }
+
+
 
     return (
         <>
@@ -39,8 +51,9 @@ export default function PaginaEmprestimo(){
         <br />
         <InputCodigoFamilia />
         
-        <Calendario {...hojeArgs} label="Data de Empréstimo"/>
-        <Calendario {...proximaSemanaArgs} label="Previsão - Devolução"/>
+        <Calendario {...hojeProps} label="Data de Empréstimo"/>
+        <Calendario {...proximaSemanaProps} label="Previsão - Devolução"/>
+        <ConfirmaEmprestimo />
         </>
     )
     
