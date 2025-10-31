@@ -12,7 +12,7 @@ import 'dayjs/locale/pt-br'
 type calendarioProps = {
     data: dayjs.Dayjs
     setData: (data:React.SetStateAction<dayjs.Dayjs>) => void
-    label: 'Data de Empréstimo' | 'Previsão - Devolução'
+    label: string
 }
 
 
@@ -24,7 +24,7 @@ export default function Calendario(props:calendarioProps) {
         label={props.label}
         value={props.data}
         minDate={dayjs('2025-01-01')}
-        onChange={(data)=>props.setData(data)}
+        onChange={(data)=>{data ? props.setData(data) : console.log('não há data')}}
         />
         </LocalizationProvider>
         </>

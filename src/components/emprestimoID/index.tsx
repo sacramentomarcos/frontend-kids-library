@@ -1,14 +1,9 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 type emprestimoIDProps = {
     setId: (id:number) => void
     id?: number | null
-}
-
-export function useEmprestimoID(){
-    const [id, setId] = useState()
-    return {id,setId}
 }
 
 export default function EmprestimoID({ id, setId }: emprestimoIDProps) {
@@ -26,7 +21,9 @@ export default function EmprestimoID({ id, setId }: emprestimoIDProps) {
     
     return (
         <>
-        <h1>Emprestimo n° {id}</h1>
+        {id && (
+        <h1 className="my-8">Emprestimo n° {id}</h1>
+        )}
         </>
     )
 }

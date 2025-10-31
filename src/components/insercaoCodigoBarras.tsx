@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import DadosLivro from "./livroInfo";
 import { type dadosLivrosProps } from "../types/livroDTO";
 import TextField from "@mui/material/TextField";
 
 
 type Props = {
     setLivro: (livro: dadosLivrosProps) => void
-    livro?: dadosLivrosProps
+    livro?: dadosLivrosProps | null
 }
 
 export default function VerificacaoCodigoBarras({ livro, setLivro }: Props) {
@@ -24,11 +23,10 @@ export default function VerificacaoCodigoBarras({ livro, setLivro }: Props) {
         const timeout = setTimeout(async () => {
             try {
                 const dadosLivro: Response = await fetch(`http://127.0.0.1:3000/livros/${codigoBarras}`);
-
-
             if (!dadosLivro.ok) throw new Error('Livro não encontrado');
             const dadosJSON = await dadosLivro.json();
             const livroFormatado: dadosLivrosProps = {
+                id: dadosJSON.id_livro,
                 title: dadosJSON.titulo,
                 author: dadosJSON.autor,
                 year: dadosJSON.ano_publicacao
@@ -45,15 +43,8 @@ export default function VerificacaoCodigoBarras({ livro, setLivro }: Props) {
 
     return (
     <>
-        {/* <input
-        type='text'
-        onChange={(e) => setCodigoBarras(e.target.value)}
-        placeholder="Escaneie código do livro"
-        autoFocus
-        >
-        </input> */}
-
         <TextField
+        className="w-full"
         id="codigoBarras"
         onChange={(e) => setCodigoBarras(e.target.value)}
         autoFocus
@@ -66,11 +57,12 @@ export default function VerificacaoCodigoBarras({ livro, setLivro }: Props) {
             livro &&
             (   <>
                 <h2>Dados do livro</h2>
-                <DadosLivro
-                title={livro.title}
-                author={livro.author}
-                year={livro.year}
-                />
+                <div>
+                <h2>{livro.title}</h2>
+                <h3>{livro.author}</h3>
+                <h3>{livro.year}</h3>
+                <h3>{livro.publisher}</h3>
+                </div>
                 </>
             )
         }
