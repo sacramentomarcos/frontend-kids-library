@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { type dadosLivrosProps } from "../types/livroDTO";
 import TextField from "@mui/material/TextField";
+import { Divider } from "@mui/material";
+import Box from "@mui/material/Box";
 
 
 type Props = {
@@ -32,7 +34,6 @@ export default function VerificacaoCodigoBarras({ livro, setLivro }: Props) {
                 year: dadosJSON.ano_publicacao
             }
             setLivro(livroFormatado)
-            console.log('livro formatou')
             } catch (e) {
                 console.log(`error - ${e}`);
             }
@@ -55,15 +56,19 @@ export default function VerificacaoCodigoBarras({ livro, setLivro }: Props) {
 
         {
             livro &&
-            (   <>
+            ( 
+                <div
+            className="flex flex-col justify-center items-center m-8
+                bg-white text-indigo-900 rounded-xl shadow-md p-4"
+            >
                 <h2>Dados do livro</h2>
-                <div>
                 <h2>{livro.title}</h2>
                 <h3>{livro.author}</h3>
+                
                 <h3>{livro.year}</h3>
                 <h3>{livro.publisher}</h3>
+                
                 </div>
-                </>
             )
         }
     </>
