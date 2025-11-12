@@ -10,7 +10,7 @@ type Props = {
     livro?: dadosLivrosProps | null
 }
 
-export default function VerificacaoCodigoBarras({ livro, setLivro }: Props) {
+export default function DadosLivro({ livro, setLivro }: Props) {
     const [codigoBarras, setCodigoBarras] = useState('')
 
     function verificaCodigo(codigo:string) {

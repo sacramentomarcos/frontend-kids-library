@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import VerificacaoCodigoBarras from '../components/insercaoCodigoBarras'
+import DadosLivro from '../components/insercaoCodigoBarras'
 import { type dadosLivrosProps } from '../types/livroDTO'
 import {type IInfoFamilia} from '../types/usuarioDTO.ts'
 import { useNavigate } from 'react-router-dom'
@@ -23,6 +23,7 @@ export default function PaginaEmprestimo(){
     const [dataPrevisaoDevolucao, setDataPrevisaoDevolucao] = useState<dayjs.Dayjs>(proxima_semana)
     const [idEmprestimo, setIdEmprestimo] = useState<number | null>(null)
     const [usuarioSelecionado, setUsuarioSelecionado] = useState<IInfoFamilia | null>(null)
+
 
     const dadosEmprestimo = {
         id_emprestimo: idEmprestimo,
@@ -49,7 +50,7 @@ export default function PaginaEmprestimo(){
         >
         <EmprestimoID setId={setIdEmprestimo} id={idEmprestimo}/>
         <p>Insira o código de barras do livro:</p>
-        <VerificacaoCodigoBarras setLivro={setLivro} livro={livro}/>
+        <DadosLivro setLivro={setLivro} livro={livro}/>
         <InputCodigoFamilia setUsuario={setUsuarioSelecionado} usuario={usuarioSelecionado}/>
         </div>
         <div id="calendarios" className="flex flex-row mb-8">

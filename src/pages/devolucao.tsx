@@ -4,12 +4,10 @@ import VerificacaoCodigoBarras from '../components/insercaoCodigoBarras'
 
 export default function PaginaDevolucao(){
     return (
-        <>
-        {/* <h1>Devolução</h1>
-        <EmprestimoID />
-        <p>Insira o código de barras do livro:</p>
-            <VerificacaoCodigoBarras /> */}
-        </>
+        <div className='w-screen h-screen flex flex-col items-center justify-center'>
+        <h1>Devolução</h1>
+        <VerificacaoCodigoBarras />
+        </div>
     )
     
 } 
