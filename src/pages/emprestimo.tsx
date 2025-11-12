@@ -43,14 +43,14 @@ export default function PaginaEmprestimo(){
     };
 
     return (
-        <div className='w-screen justify-center items-center flex flex-col bg-emerald-500'>
+        <div className='w-screen h-screen justify-center items-center flex flex-col bg-emerald-500'>
         <div id="inputs"
         className='space-y-8 justify-items-center'
         >
         <EmprestimoID setId={setIdEmprestimo} id={idEmprestimo}/>
         <p>Insira o código de barras do livro:</p>
         <VerificacaoCodigoBarras setLivro={setLivro} livro={livro}/>
-        <InputCodigoFamilia setUsuario={setUsuarioSelecionado}/>
+        <InputCodigoFamilia setUsuario={setUsuarioSelecionado} usuario={usuarioSelecionado}/>
         </div>
         <div id="calendarios" className="flex flex-row mb-8">
         <Calendario {...hojeProps} label="Data de Empréstimo"/>
@@ -59,9 +59,9 @@ export default function PaginaEmprestimo(){
         <Button
         variant="outlined"
         onClick={()=> {
-            enviaForm(dadosEmprestimo, `emprestimos`)
+            enviaForm(dadosEmprestimo, `emprestimos`);
         }}
-        disabled={(!livro)}
+        disabled={(!livro) || (!usuarioSelecionado)}
         >
         Confirma empréstimo
         </Button>

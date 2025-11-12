@@ -13,11 +13,12 @@ type IInfoFamilia = {
 }
 
 type InputCodigoProps = {
-    setUsuario: React.Dispatch<SetStateAction<IInfoFamilia | null>>
+    setUsuario: React.Dispatch<SetStateAction<IInfoFamilia | null>>;
+    usuario: IInfoFamilia | null;
 }
 
 
-export default function InputCodigoFamilia({ setUsuario }:InputCodigoProps) {
+export default function InputCodigoFamilia({ setUsuario, usuario }:InputCodigoProps) {
     //quais informações preciso MESMO no front?
     //ela quer digitar a família sem confirmar o nome?
     // eu acho perigoso isso, porque digitar um código sem confirmar que ele realmente quer

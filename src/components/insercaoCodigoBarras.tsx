@@ -61,12 +61,11 @@ export default function VerificacaoCodigoBarras({ livro, setLivro }: Props) {
             className="flex flex-col justify-center items-center m-8
                 bg-white text-indigo-900 rounded-xl shadow-md p-4"
             >
-                <h2>Dados do livro</h2>
-                <h2>{livro.title}</h2>
-                <h3>{livro.author}</h3>
+                <h2>Título: {livro.title}</h2>
+                <h3>Autor: {livro.author}</h3>
                 
-                <h3>{livro.year}</h3>
-                <h3>{livro.publisher}</h3>
+                <h3>Ano: {livro.year}</h3>
+                <h3>Editora: {livro.publisher}</h3>
                 
                 </div>
             )
