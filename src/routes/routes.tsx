@@ -5,6 +5,7 @@ import PaginaDevolucao from "../pages/devolucao";
 import PaginaEmprestimo from "../pages/emprestimo";
 import PaginaRegistro from "../pages/registro";
 import PaginaRenovacao from "../pages/renovacao";
+// import devolucaoLoader from '../utils/loaders/devolucao';
 
 
 export const router = createBrowserRouter([
@@ -13,7 +14,8 @@ export const router = createBrowserRouter([
     element: <App/>
   },{
     path: '/devolucao',
-    element: <PaginaDevolucao />
+    element: <PaginaDevolucao />,
+    // loader: devolucaoLoader
   },{
     path: '/emprestimo',
     element: <PaginaEmprestimo/>
