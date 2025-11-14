@@ -16,7 +16,6 @@ export default function PaginaEmprestimo(){
     const hoje = dayjs()
     const proxima_semana = hoje.add(7, 'day')
 
-
     const navigate = useNavigate()
     const [livro, setLivro] = useState<dadosLivrosProps | null>(null)
     const [dataEmprestimo, setDataEmprestimo] = useState<dayjs.Dayjs>(hoje)
@@ -28,6 +27,7 @@ export default function PaginaEmprestimo(){
     const dadosEmprestimo = {
         id_emprestimo: idEmprestimo,
         id_livro: livro?.id,
+        id_usuario: usuarioSelecionado?.id_usuario,
         realizado_em: dataEmprestimo.toISOString(),
         data_realizado_em: dataEmprestimo,
         data_previsao_devolucao_em: dataPrevisaoDevolucao,
@@ -53,7 +53,9 @@ export default function PaginaEmprestimo(){
         <DadosLivro setLivro={setLivro} livro={livro}/>
         <InputCodigoFamilia setUsuario={setUsuarioSelecionado} usuario={usuarioSelecionado}/>
         </div>
-        <div id="calendarios" className="flex flex-row mb-8">
+        <div
+        id="calendarios"
+        className="flex flex-row mb-8">
         <Calendario {...hojeProps} label="Data de Empréstimo"/>
         <Calendario {...proximaSemanaProps} label="Previsão - Devolução"/>
         </div>

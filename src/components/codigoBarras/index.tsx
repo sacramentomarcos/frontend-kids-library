@@ -1,7 +1,4 @@
-import React, { useState, useEffect } from 'react'
-import get from '../../utils/api'
 import { Dayjs } from 'dayjs'
-import { DataGrid, type GridColDef } from '@mui/x-data-grid'
 import { TextField } from '@mui/material'
 
 type Emprestimos = {
@@ -24,15 +21,11 @@ export default function CodigoBarras({codigo, setCodigo}: {codigo:string, setCod
         return regex.test(codigoParaVerificar)
     }
 
-    async function handleChange(codigoInserido:string) {
+    function handleChange(codigoInserido:string) {
         if (!codigoValidado(codigoInserido)) {
             return
         }
-        const todosEmprestimos = await get<Emprestimos[]>('/emprestimos')
-        if (!todosEmprestimos){
-            return <h1>Erro ao consultar os empréstimos</h1>
-        }   
-
+        setCodigo(codigoInserido)
     }
 
     return (
