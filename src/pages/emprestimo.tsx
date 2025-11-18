@@ -23,7 +23,6 @@ export default function PaginaEmprestimo(){
     const [idEmprestimo, setIdEmprestimo] = useState<number | null>(null)
     const [usuarioSelecionado, setUsuarioSelecionado] = useState<IInfoFamilia | null>(null)
 
-
     const dadosEmprestimo = {
         id_emprestimo: idEmprestimo,
         id_livro: livro?.id,

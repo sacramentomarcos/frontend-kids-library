@@ -1,4 +1,3 @@
-import React from 'react'
 import { useState, useEffect } from 'react'
 import { DataGrid } from '@mui/x-data-grid'
 import axios from 'axios'
@@ -10,15 +9,16 @@ import { List } from '@mui/material'
 
 export default function PaginaDevolucao(){
     // PRECISO AQUI VER TODOS OS EMPRESTIMOS QUE ACONTECERAM E AINDA ESTÃO ATIVO
+    const [emprestimosSelecionado, setEmprestimoSelecionado] = useState<boolean>(false)
     
 
     return (
         <div className='w-screen h-screen flex flex-col items-center justify-center'>
         <h1>Devolução</h1>
 
-        <button type='button'></button>
-        <ListaEmprestimos/>
+        
+        <ListaEmprestimos emprestimosSelecionado={emprestimosSelecionado} setemprestimoSelecionado={setEmprestimoSelecionado}/>
+        <button type='button' disabled={emprestimosSelecionado}></button>
         </div>
     );
-    
 };

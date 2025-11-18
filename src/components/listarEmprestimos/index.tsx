@@ -1,8 +1,22 @@
 import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
 import { DataGrid } from "@mui/x-data-grid"
+import type dayjs from "dayjs"
 
-export default function ListaEmprestimos() {
+type EmprestimoType = {
+    idEmprestimo: number
+    codigoFamilia: number
+    nomeCompleto: string
+    titulo: string
+    dataRealizadoEm: dayjs.Dayjs
+}
+
+type ListaEmprestimoProps = {
+    emprestimosSelecionado: EmprestimoType[]
+    setEmprestimoSelecionado: (a:boolean) => boolean
+}
+
+export default function ListaEmprestimos({emprestimoSelecionado, setEmprestimoSelecionado}: ListaEmprestimoProps) {
     const { data, isLoading, error } = useQuery({
         queryKey: ['emprestimos'],
         queryFn: async () => {
@@ -16,43 +30,37 @@ export default function ListaEmprestimos() {
 
     const colunas = [
         {
-            field: 'id_emprestimo',
+            field: 'idEmprestimo',
             headerName: 'ID',
             width:50
         },
         {
-            field: 'id_livro',
-            headerName:'idLivro',
-            width:50
-        },
-        {
-            field: 'id_usuario',
-            headerName:'idUsuario',
+            field: 'nomeCompleto',
+            headerName:'Nome Completo',
             width:300
         },
         {
-            field: 'data_realizado_em',
+            field: 'dataRealizadoEm',
             headerName:'Realizado em',
             width:250
         },
         {
-            field: 'data_previsao_devolucao_em',
+            field: 'dataPrevisaoDevolucaoEm',
             headerName:'Devolução prevista para',
             width:250
         }
-
-
-
     ]
+
+    if (data) console.log(data)
 
 
     return (
         <div id='tabela'
         className="w-300 h-100">
         <DataGrid
-        rows={data.map((e:any)=>({...e, id:e.id_emprestimo}))}
+        rows={data.map((row:any)=>({...row, id:row.idEmprestimo}))}
         columns={colunas}
-        checkboxSelection
+        onRowSelectionModelChange={()=>setEmprestimoSelecionado()}
         />
         </div>
     )
