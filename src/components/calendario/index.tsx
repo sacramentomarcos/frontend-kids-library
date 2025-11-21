@@ -1,7 +1,6 @@
 import React, { type SetStateAction } from "react";
 import {
-    DatePicker,
-    type DatePickerProps
+    DatePicker
 } from "@mui/x-date-pickers";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import dayjs from "dayjs";

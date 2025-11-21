@@ -1,7 +1,11 @@
 import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
-import { DataGrid } from "@mui/x-data-grid"
-import type dayjs from "dayjs"
+import { DataGrid, renderEditDateCell, type GridCellParams, type GridRowSelectionModel } from "@mui/x-data-grid"
+import dayjs from "dayjs"
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs"
+import { LocalizationProvider } from "@mui/x-date-pickers"
+import { useState } from "react"
+import { DatePicker } from "@mui/x-date-pickers"
 
 type EmprestimoType = {
     idEmprestimo: number
@@ -11,12 +15,8 @@ type EmprestimoType = {
     dataRealizadoEm: dayjs.Dayjs
 }
 
-type ListaEmprestimoProps = {
-    emprestimosSelecionado: EmprestimoType[]
-    setEmprestimoSelecionado: (a:boolean) => boolean
-}
 
-export default function ListaEmprestimos({emprestimoSelecionado, setEmprestimoSelecionado}: ListaEmprestimoProps) {
+export default function ListaEmprestimos({emprestimosSelecionados, setEmprestimoSelecionado}: {emprestimosSelecionados:EmprestimoType[], setEmprestimoSelecionado:React.Dispatch<React.SetStateAction<EmprestimoType[]>>}) {
     const { data, isLoading, error } = useQuery({
         queryKey: ['emprestimos'],
         queryFn: async () => {
@@ -25,13 +25,28 @@ export default function ListaEmprestimos({emprestimoSelecionado, setEmprestimoSe
         }
     })
 
+    const [dataDevolucao, setDataDevolucao] = useState<Record<number, dayjs.Dayjs | null>>({})
+
     if (isLoading) return <p>Carregando...</p>
     if (error) return <p>erro ao carregar os dados</p>
+
+    function handleSelectionChange(selectionModel: GridRowSelectionModel) {
+        if (!data) {
+            setEmprestimoSelecionado({})
+            return
+        }
+
+        const ids = new Set(selectionModel.ids)
+        const selectedRows = data.filter((row:any) => ids.has(row.idEmprestimo))
+        const
+        
+        setEmprestimoSelecionado(selectedRows)
+    }
 
     const colunas = [
         {
             field: 'idEmprestimo',
-            headerName: 'ID',
+            headerName: 'n° Empréstimo',
             width:50
         },
         {
@@ -40,27 +55,48 @@ export default function ListaEmprestimos({emprestimoSelecionado, setEmprestimoSe
             width:300
         },
         {
+            field: 'titulo',
+            headerName:'Título',
+            width:300
+        },
+        {
             field: 'dataRealizadoEm',
             headerName:'Realizado em',
             width:250
         },
         {
-            field: 'dataPrevisaoDevolucaoEm',
-            headerName:'Devolução prevista para',
-            width:250
+            field: 'devolucaoEm',
+            headerName: 'Devolucao em',
+            renderCell: (params: GridCellParams<any, Date>) => (
+                <div className="h-full m-2">
+                <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="pt-br">
+                        <DatePicker
+                        value={params.row.idEmprestimo}
+                        minDate={dayjs('2025-01-01')}
+                        onChange={(data)=>{
+                            setDataDevolucao(prev => ({
+                                ...prev,
+                                data.
+                            }))
+                        }}
+                        />
+                </LocalizationProvider>
+                </div>
+            ),
+            width: 200,
+            
         }
     ]
-
-    if (data) console.log(data)
-
 
     return (
         <div id='tabela'
         className="w-300 h-100">
         <DataGrid
-        rows={data.map((row:any)=>({...row, id:row.idEmprestimo}))}
+        rowHeight={70}
+        rows={data?.map((row:any)=>({...row, id:row.idEmprestimo})) ?? []}
         columns={colunas}
-        onRowSelectionModelChange={()=>setEmprestimoSelecionado()}
+        onRowSelectionModelChange={handleSelectionChange}
+        checkboxSelection
         />
         </div>
     )
