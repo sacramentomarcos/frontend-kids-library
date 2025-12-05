@@ -2,10 +2,7 @@ import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
 import { DataGrid, renderEditDateCell, type GridCellParams, type GridRowSelectionModel } from "@mui/x-data-grid"
 import dayjs from "dayjs"
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs"
-import { LocalizationProvider } from "@mui/x-date-pickers"
-import { useState } from "react"
-import { DatePicker } from "@mui/x-date-pickers"
+import { useState, type SetStateAction } from "react"
 
 type EmprestimoType = {
     idEmprestimo: number
@@ -32,14 +29,13 @@ export default function ListaEmprestimos({emprestimosSelecionados, setEmprestimo
 
     function handleSelectionChange(selectionModel: GridRowSelectionModel) {
         if (!data) {
-            setEmprestimoSelecionado({})
+            setEmprestimoSelecionado({} as EmprestimoType[])
             return
         }
 
         const ids = new Set(selectionModel.ids)
         const selectedRows = data.filter((row:any) => ids.has(row.idEmprestimo))
-        const
-        
+
         setEmprestimoSelecionado(selectedRows)
     }
 
@@ -67,24 +63,7 @@ export default function ListaEmprestimos({emprestimosSelecionados, setEmprestimo
         {
             field: 'devolucaoEm',
             headerName: 'Devolucao em',
-            renderCell: (params: GridCellParams<any, Date>) => (
-                <div className="h-full m-2">
-                <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="pt-br">
-                        <DatePicker
-                        value={params.row.idEmprestimo}
-                        minDate={dayjs('2025-01-01')}
-                        onChange={(data)=>{
-                            setDataDevolucao(prev => ({
-                                ...prev,
-                                data.
-                            }))
-                        }}
-                        />
-                </LocalizationProvider>
-                </div>
-            ),
             width: 200,
-            
         }
     ]
 

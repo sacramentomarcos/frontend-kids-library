@@ -15,12 +15,12 @@ export default function App():React.ReactElement {
       <Link to='/devolucao'>
       <button className=''>Devolução</button>
       </Link>
-      <Link to='/registro'>
-      <button className=''>Registro</button>
-      </Link>
+      {/* <Link to='/registro'>
+      <button className=''>Registro</button> */}
+      {/* </Link>
       <Link to='/renovacao'>
       <button className=''>Renovação</button>
-      </Link>
+      </Link> */}
     </div>
     </div>
   )
