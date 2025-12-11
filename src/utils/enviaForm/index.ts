@@ -1,7 +1,7 @@
-export default async function enviaForm(objeto:any = {}, destinoRota: string) {
+export default async function enviaForm(objeto:any = {}, metodo:string='POST',destinoRota: string) {
     const rotaCompleta = 'http://127.0.0.1:3000/' + destinoRota
     const resposta = await fetch(rotaCompleta, {
-        method: 'POST',
+        method: metodo,
         headers: {
             'Content-Type': 'application/json',
         },

@@ -18,7 +18,8 @@ export default function ListaEmprestimos({emprestimosSelecionados, setEmprestimo
         queryKey: ['emprestimos'],
         queryFn: async () => {
         const response = await axios.get('http://127.0.0.1:3000/emprestimos')
-        return response.data
+        const emprestimosAtivos = [...response.data].filter((e)=> e.status === true)
+        return emprestimosAtivos
         }
     })
 
@@ -61,7 +62,7 @@ export default function ListaEmprestimos({emprestimosSelecionados, setEmprestimo
             width:250
         },
         {
-            field: 'devolucaoEm',
+            field: 'devolucaoPrevistaEm',
             headerName: 'Devolucao em',
             width: 200,
         }
@@ -72,10 +73,11 @@ export default function ListaEmprestimos({emprestimosSelecionados, setEmprestimo
         className="w-300 h-100">
         <DataGrid
         rowHeight={70}
-        rows={data?.map((row:any)=>({...row, id:row.idEmprestimo})) ?? []}
+        rows={data?.map((row:any)=>({...row, id:row.idEmprestimo, dataRealizadoEm: dayjs(row.dataRealizadoEm).format('DD/MM/YYYY')})) ?? []}
         columns={colunas}
         onRowSelectionModelChange={handleSelectionChange}
         checkboxSelection
+        sx={{ '--DataGrid-overlayHeight': '300px' }}
         />
         </div>
     )

@@ -69,7 +69,7 @@ export default function PaginaEmprestimo(){
             setError(null)
             setSubmitting(true)
             try{
-                await enviaForm(dadosEmprestimo, `emprestimos`)
+                await enviaForm(dadosEmprestimo,'POST', `emprestimos`)
                 setSuccess(true)
                 // show success then redirect to home after short delay
                 setTimeout(()=> navigate('/'), 2000)

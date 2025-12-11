@@ -8,6 +8,7 @@ import dayjs from 'dayjs'
 import enviaForm from '../utils/enviaForm/index.ts'
 import { useNavigate } from 'react-router-dom'
 
+
 type EmprestimoType = {
     idEmprestimo: number
     codigoFamilia: number
@@ -31,7 +32,6 @@ export default function PaginaDevolucao(){
     return (
         <div className='w-screen h-screen flex flex-col items-center justify-center gap-8'>
         <h1>Devolução</h1>
-        
         <ListaEmprestimos emprestimosSelecionados={emprestimosSelecionado} setEmprestimoSelecionado={setEmprestimoSelecionado}/>
         <div>
             <Button
@@ -41,10 +41,9 @@ export default function PaginaDevolucao(){
                     setError(null)
                     setSubmitting(true)
                     try{
-                        // Assumption: backend accepts POST to 'devolucoes' with payload { emprestimos: number[] }
-                        await enviaForm(data, 'devolucoes')
+                        await enviaForm(data, 'PATCH', 'devolucoes')
                         setSuccess(true)
-                        setTimeout(()=> navigate('/'), 2000)
+                        setTimeout(()=> navigate('/'), 1500)
                     }catch(err:any){
                         setError(err?.message ?? 'Erro ao confirmar devolução')
                     }finally{
