@@ -1,8 +1,7 @@
 import { useQuery } from "@tanstack/react-query"
 import { axiosInstance } from "../../utils/api"
-import { DataGrid, renderEditDateCell, type GridCellParams, type GridRowSelectionModel } from "@mui/x-data-grid"
+import { DataGrid, type GridRowSelectionModel } from "@mui/x-data-grid"
 import dayjs from "dayjs"
-import { useState, type SetStateAction } from "react"
 
 type EmprestimoType = {
     idEmprestimo: number
@@ -13,7 +12,7 @@ type EmprestimoType = {
 }
 
 
-export default function ListaEmprestimos({emprestimosSelecionados, setEmprestimoSelecionado}: {emprestimosSelecionados:EmprestimoType[], setEmprestimoSelecionado:React.Dispatch<React.SetStateAction<EmprestimoType[]>>}) {
+export default function ListaEmprestimos({ setEmprestimoSelecionado}: {emprestimosSelecionados:EmprestimoType[], setEmprestimoSelecionado:React.Dispatch<React.SetStateAction<EmprestimoType[]>>}) {
     const { data, isLoading, error } = useQuery({
         queryKey: ['emprestimos'],
         queryFn: async () => {
@@ -23,7 +22,6 @@ export default function ListaEmprestimos({emprestimosSelecionados, setEmprestimo
         }
     })
 
-    const [dataDevolucao, setDataDevolucao] = useState<Record<number, dayjs.Dayjs | null>>({})
 
     if (isLoading) return <p>Carregando...</p>
     if (error) return <p>erro ao carregar os dados</p>

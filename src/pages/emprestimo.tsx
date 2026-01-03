@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import DadosLivro from '../components/insercaoCodigoBarras'
 import { type dadosLivrosProps } from '../types/livroDTO'
 import {type IInfoFamilia} from '../types/usuarioDTO.ts'

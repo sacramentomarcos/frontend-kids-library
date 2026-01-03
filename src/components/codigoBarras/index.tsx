@@ -1,16 +1,7 @@
-import { Dayjs } from 'dayjs'
+// import { Dayjs } from 'dayjs'
 import { TextField } from '@mui/material'
 
-type Emprestimos = {
-    id_emprestimo:number
-    id_livro: number
-    id_usuario: string
-    realizado_em: Dayjs
-    data_realizado_em: Dayjs
-    data_previsao_devolucao_em: Dayjs
-    status: boolean
-    data_devolucao_em?: Dayjs
-}
+
 
 export default function CodigoBarras({codigo, setCodigo}: {codigo:string, setCodigo: (codigo:string) => void}) {
 

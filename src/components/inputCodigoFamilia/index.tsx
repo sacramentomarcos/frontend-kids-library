@@ -1,4 +1,4 @@
-import React, { type ChangeEvent, type SetStateAction, type SyntheticEvent } from "react";
+import React, {type SetStateAction} from "react";
 
 import { useState, useEffect } from "react";
 import axiosInstance from "../../utils/api"
@@ -19,7 +19,7 @@ type InputCodigoProps = {
 }
 
 
-export default function InputCodigoFamilia({ setUsuario, usuario }:InputCodigoProps) {
+export default function InputCodigoFamilia({ setUsuario }:InputCodigoProps) {
     //quais informações preciso MESMO no front?
     //ela quer digitar a família sem confirmar o nome?
     // eu acho perigoso isso, porque digitar um código sem confirmar que ele realmente quer

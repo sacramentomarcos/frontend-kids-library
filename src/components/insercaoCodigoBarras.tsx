@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axiosInstance from "../utils/api";
 import { type dadosLivrosProps } from "../types/livroDTO";
 import TextField from "@mui/material/TextField";
-import { Divider } from "@mui/material";
-import Box from "@mui/material/Box";
 
 
 type Props = {
