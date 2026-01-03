@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axiosInstance from "../utils/api";
 import { type dadosLivrosProps } from "../types/livroDTO";
 import TextField from "@mui/material/TextField";
 import { Divider } from "@mui/material";
@@ -24,16 +25,15 @@ export default function DadosLivro({ livro, setLivro }: Props) {
         
         const timeout = setTimeout(async () => {
             try {
-                const dadosLivro: Response = await fetch(`http://127.0.0.1:3000/livros/${codigoBarras}`);
-            if (!dadosLivro.ok) throw new Error('Livro não encontrado');
-            const dadosJSON = await dadosLivro.json();
-            const livroFormatado: dadosLivrosProps = {
-                id: dadosJSON.id_livro,
-                title: dadosJSON.titulo,
-                author: dadosJSON.autor,
-                year: dadosJSON.ano_publicacao
-            }
-            setLivro(livroFormatado)
+                const resp = await axiosInstance.get(`/livros/${codigoBarras}`)
+                const dadosJSON = resp.data
+                const livroFormatado: dadosLivrosProps = {
+                    id: dadosJSON.id_livro,
+                    title: dadosJSON.titulo,
+                    author: dadosJSON.autor,
+                    year: dadosJSON.ano_publicacao
+                }
+                setLivro(livroFormatado)
             } catch (e) {
                 console.log(`error - ${e}`);
             }

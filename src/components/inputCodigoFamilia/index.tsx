@@ -1,6 +1,7 @@
 import React, { type ChangeEvent, type SetStateAction, type SyntheticEvent } from "react";
 
 import { useState, useEffect } from "react";
+import axiosInstance from "../../utils/api"
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 
@@ -29,8 +30,8 @@ export default function InputCodigoFamilia({ setUsuario, usuario }:InputCodigoPr
     
     useEffect(() => {
         async function buscaFamilias() {
-        const dados = await fetch('http://127.0.0.1:3000/usuarios')
-        const dadosJSON = await dados.json()
+        const resp = await axiosInstance.get('/usuarios')
+        const dadosJSON = resp.data
         dadosJSON.map((item:IInfoFamilia) => item.codigo_nome = `${item.codigo_familia} - ${item.nome_completo}`)
         setInfoFamilias(dadosJSON)
         }

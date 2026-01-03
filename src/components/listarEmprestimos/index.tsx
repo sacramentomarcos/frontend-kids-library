@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import axios from "axios"
+import { axiosInstance } from "../../utils/api"
 import { DataGrid, renderEditDateCell, type GridCellParams, type GridRowSelectionModel } from "@mui/x-data-grid"
 import dayjs from "dayjs"
 import { useState, type SetStateAction } from "react"
@@ -17,7 +17,7 @@ export default function ListaEmprestimos({emprestimosSelecionados, setEmprestimo
     const { data, isLoading, error } = useQuery({
         queryKey: ['emprestimos'],
         queryFn: async () => {
-        const response = await axios.get('http://127.0.0.1:3000/emprestimos')
+    const response = await axiosInstance.get('/emprestimos')
         const emprestimosAtivos = [...response.data].filter((e)=> e.status === true)
         return emprestimosAtivos
         }

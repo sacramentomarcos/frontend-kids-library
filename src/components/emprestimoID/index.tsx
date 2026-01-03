@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import axiosInstance from "../../utils/api"
 
 type emprestimoIDProps = {
     setId: (id:number) => void
@@ -8,12 +9,12 @@ type emprestimoIDProps = {
 export default function EmprestimoID({ id, setId }: emprestimoIDProps) {
     
     useEffect(() => {
-        const buscarIdEmprestimo = async () => {
-        const response = await fetch('http://127.0.0.1:3000/emprestimos/atual')
-        const dados = await response.json()
-        const id: number = dados.id
-        setId(id)
-        }
+    const buscarIdEmprestimo = async () => {
+    const response = await axiosInstance.get('/emprestimos/atual')
+    const dados = response.data
+    const id: number = dados.id
+    setId(id)
+    }
 
         buscarIdEmprestimo()
     }, [])
