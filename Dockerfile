@@ -14,9 +14,6 @@ RUN pnpm install --frozen-lockfile
 # Copy the rest of the sources
 COPY . .
 
-# Allow setting the API base URL at build time. Vite reads import.meta.env at build.
-ARG VITE_API_BASE_URL
-ENV VITE_API_BASE_URL=${VITE_API_BASE_URL:-http://frontend:3000}
 ENV NODE_ENV=production
 
 # Build the app

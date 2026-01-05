@@ -11,7 +11,8 @@ export default defineConfig({
   watch: {
       ignored: ['**/node_modules/**', '**/dist/**'],
     },
-    cors: { origin: "localhost:3000"
+    cors: {
+      origin: "*"
     }
   }
 })
