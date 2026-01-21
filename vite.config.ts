@@ -14,5 +14,8 @@ export default defineConfig({
     cors: {
       origin: "*"
     }
+  },
+  define: {
+    'process.env': {'VITE_API_BASE_URL':'https://backend-kids-library-6nzgvw.fly.dev/'}
   }
 })
